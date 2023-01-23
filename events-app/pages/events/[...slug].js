@@ -9,7 +9,10 @@ const FilteredEvents = () => {
     const [loadedEvents, setLoadedEvents] = useState();
     // Queries "...slug" array as params in getServerSideProps()
     const filterData = useRouter().query.slug;
-    const { data, error } = useSWR('https://nextjs-course-50b3c-default-rtdb.firebaseio.com/events.json');
+    const { data, error } = useSWR(
+        'https://nextjs-course-50b3c-default-rtdb.firebaseio.com/events.json',
+        url => fetch(url).then(res => res.json())
+    );
 
     useEffect(() => {
         if (data) {
