@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import classes from "./event-item.module.css";
 import { Button } from "../ui";
 import { DateIcon, AddressIcon, ArrowRightIcon } from "../icons";
@@ -11,7 +13,13 @@ export default function EventItem({ title, image, date, location, id }) {
 
     return (
         <li className={classes.item}>
-            <img src={'/' + image} alt={image || "undefined image"} />
+            <Image
+                src={'/' + image}
+                alt={image || "undefined image"}
+                width={250}
+                height={160}
+            />
+            {/* <img src={'/' + image} alt={image || "undefined image"} /> */}
             <div className={classes.content}>
                 <div className={classes.summary}>
                     <h2>{ title }</h2>

@@ -4,6 +4,7 @@ import useSWR from "swr";
 
 import { EventList, ResultsTitle } from "../../components/events";
 import { Button, ErrorAlert } from "../../components/ui";
+import HeadData from "../../helpers/Head";
 
 const FilteredEvents = () => {
     const [loadedEvents, setLoadedEvents] = useState();
@@ -30,7 +31,12 @@ const FilteredEvents = () => {
     }, [data])
 
     if (!loadedEvents) {
-        return <p className="center">Loading...</p>
+        return (
+            <Fragment>
+                {HeadData("Loading...", null, "Loading Placeholder")}
+                <p className="center">Loading...</p>
+            </Fragment>
+        )
     }
     
     const numYear = +filterData[0];
@@ -40,6 +46,10 @@ const FilteredEvents = () => {
         numYear > 2030 || numMonth < 1 || numMonth > 12 || error) {
         return (
             <Fragment>
+                {/* <HeadData
+                    title="Filtered Events"
+                    content="Invalid Filter"
+                /> */}
                 <ErrorAlert>
                     <p>Invalid filter. Please adjust your values!</p>
                 </ErrorAlert>
@@ -56,9 +66,16 @@ const FilteredEvents = () => {
         return eventDate.getFullYear() === numYear && eventDate.getMonth() === numMonth - 1;
     });
 
+    const headData = HeadData(
+        `All events for ${numMonth}/${numYear}`,
+        null,
+        `All events for ${numMonth}/${numYear}`
+    )
+
     if (!filteredEvents || filteredEvents.length === 0) {
         return (
             <Fragment>
+                {headData}
                 <ErrorAlert>
                     <p>No events found for the chosen filter.</p>
                 </ErrorAlert>
@@ -71,6 +88,7 @@ const FilteredEvents = () => {
 
     return (
         <Fragment>
+            {headData}
             <ResultsTitle date={new Date(numYear, numMonth - 1)} />
             <EventList items={filteredEvents} />
         </Fragment>
