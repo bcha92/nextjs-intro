@@ -2,8 +2,8 @@ import { Fragment } from "react";
 import Head from "next/head";
 
 import { EventContent, EventLogistics, EventSummary } from "../../components/event-detail";
-import { ErrorAlert } from "../../components/ui";
-import { getAllEvents, getEventById, getFeaturedEvents } from "../../helpers/api-util";
+import Comments from "../../components/input/comments";
+import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 
 const EventDetailPage = (props) => {
     // Queries "eventId" string as params
@@ -36,6 +36,7 @@ const EventDetailPage = (props) => {
             <EventContent>
                 <p>{event.description}</p>
             </EventContent>
+            <Comments eventId={event.id} />
         </Fragment>
     )
 }
