@@ -7,7 +7,7 @@ export default function HomePage(props) {
     return (
         <Fragment>
             <Head>
-                <title>Brandy's Blog</title>
+                <title>Brandy's Blog {process.env.mongodb_database}</title>
                 <meta name="description" content="I post about programming and web development" />
             </Head>
             <Hero />
